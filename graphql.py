@@ -12,52 +12,54 @@ token = os.environ['GITHUB_TOKEN']
 
 headers = {"Authorization": "token {}".format(token)}
 
-def run_query(query): # A simple function to use requests.post to make the API call. Note the json= section.
-    request = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers)
+# A simple function to use requests.post to make the API call.
+# Note the json= section.
+def run_query(query, variables):
+    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=headers)
     if request.status_code == 200:
         return request.json()
     else:
         raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
 
-num = sys.argv[1]
-
 query = """
-{{
-  organization(login: "neomutt") {{
-    repository(name: "neomutt") {{
-      issue(number: {0}) {{
+query ($num: Int!) {
+  organization(login: "neomutt") {
+    repository(name: "neomutt") {
+      issue(number: $num) {
         title
         url
-        author {{
+        author {
           login
-        }}
-      }}
-      pullRequest(number: {0}) {{
+        }
+      }
+      pullRequest(number: $num) {
         title
         url
-        author {{
+        author {
           login
-        }}
-      }}
-      discussion(number: {0}) {{
+        }
+      }
+      discussion(number: $num) {
         title
         url
-        author {{
+        author {
           login
-        }}
-        comments(first: 0) {{
+        }
+        comments(first: 0) {
           totalCount
-        }}
-        category {{
+        }
+        category {
           emojiHTML
-        }}
-      }}
-    }}
-  }}
-}}
+        }
+      }
+    }
+  }
+}
 """
 
-result = run_query(query.format(sys.argv[1]))
+variables = "{{ \"num\": {} }}".format(sys.argv[1])
+
+result = run_query(query, variables)
 # print("")
 # pprint(result)
 # print("")
