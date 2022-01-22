@@ -1,10 +1,18 @@
 {
   organization(login: "neomutt") {
     repository(name: "neomutt") {
-      object(expression: "7d1cc22f1") {
+      object(expression: "20211029") {
         oid
         abbreviatedOid
         ... on Commit {
+          signature {
+            email
+            signer {
+              name
+              login
+            }
+            state
+          }
           authoredDate
           committedDate
           changedFiles
