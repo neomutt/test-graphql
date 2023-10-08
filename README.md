@@ -133,42 +133,6 @@ Sample output:
                   "messageHeadline": "msgcont: fix redraw",
                   "oid": "41c015df55fe876e63f44dee172fa575880ef5df"
                 }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "msgwin: yes/no/quad",
-                  "oid": "321d00d081fe4eebccb9902eae2cbb9ce7b3f5c4"
-                }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "msgwin: multi",
-                  "oid": "9463d70411e680551aadea9ffd8f08d9f4d42bbf"
-                }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "msgwin: upgrade mw_change_flag()",
-                  "oid": "cc3f0a91dee1d164c1ee9d7b5c2ee99d4bb0effd"
-                }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "msgwin: <what-key>",
-                  "oid": "8c0c69f8bcd0a95b2748532413540defc8be034b"
-                }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "<what-key> 2-line",
-                  "oid": "50e8e9120fa1624bcb0b49550ddf6502ac0b4fd4"
-                }
-              },
-              {
-                "commit": {
-                  "messageHeadline": "msgwin: upgrade bounce message",
-                  "oid": "2fbfca8d0bc302b330d4923d5229227d9afa8cd1"
-                }
               }
             ]
           },
@@ -199,7 +163,7 @@ Output contains something like:
 }
 ```
 
-To get the nex page, run:
+To get the next page, run:
 
 ```
 gh api graphql -F cursor="Y3Vyc29yOnYyOpHOBjMBXA==" -f query="$(cat pr-paged.ql)"
