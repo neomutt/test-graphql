@@ -1,6 +1,6 @@
-{
-  repository(owner: "neomutt", name: "neomutt") {
-    pullRequest(number: 3197) {
+query ($org: String = "neomutt", $repo: String = "neomutt", $number: Int!) {
+  repository(owner: $org, name: $repo) {
+    pullRequest(number: $number) {
       title
       url
       author {

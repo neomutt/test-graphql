@@ -1,6 +1,6 @@
-{
-  repository(owner: "neomutt", name: "neomutt") {
-    object(expression: "20211029") {
+query ($org: String = "neomutt", $repo: String = "neomutt", $commit: String!) {
+  repository(owner: $org, name: $repo) {
+    object(expression: $commit) {
       oid
       abbreviatedOid
       ... on Commit {

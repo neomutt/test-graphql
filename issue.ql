@@ -1,6 +1,6 @@
-{
-  repository(owner: "neomutt", name: "neomutt") {
-    issue(number: 2730) {
+query ($org: String = "neomutt", $repo: String = "neomutt", $number: Int!) {
+  repository(owner: $org, name: $repo) {
+    issue(number: $number) {
       title
       url
       author {

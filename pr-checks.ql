@@ -1,7 +1,6 @@
-
-{
-  repository(owner: "neomutt", name: "neomutt") {
-    pullRequest(number: 3125) {
+query ($org: String = "neomutt", $repo: String = "neomutt", $number: Int!) {
+  repository(owner: $org, name: $repo) {
+    pullRequest(number: $number) {
       number
       commits(last: 1) {
         nodes {

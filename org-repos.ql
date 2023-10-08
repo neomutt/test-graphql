@@ -1,10 +1,10 @@
-{
-  organization(login: "neomutt") {
+query ($org: String = "neomutt", $count: Int = 10) {
+  organization(login: $org) {
     description
     location
     login
     name
-    repositories(first: 10) {
+    repositories(first: $count) {
       nodes {
         name
       }

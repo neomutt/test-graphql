@@ -1,20 +1,20 @@
-{
-  repository(owner: "neomutt", name: "neomutt") {
-    issue(number: 3200) {
+query ($org: String = "neomutt", $repo: String = "neomutt", $number: Int!) {
+  repository(owner: $org, name: $repo) {
+    issue(number: $number) {
       title
       url
       author {
         login
       }
     }
-    pullRequest(number: 3200) {
+    pullRequest(number: $number) {
       title
       url
       author {
         login
       }
     }
-    discussion(number: 3200) {
+    discussion(number: $number) {
       title
       url
       author {

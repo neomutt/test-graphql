@@ -50,3 +50,72 @@ Here are some working examples:
 ./graphql.py 3203
 ```
 
+## Scripts
+
+These GraphQL scripts can be executed using the GitHub `gh` tool.
+Most of them take named parameters.
+Those marked with `!` are required -- they don't have default values.
+
+| GraphQL                                      | Parameters (Required!)    | Description                                                    |
+| :------------------------------------------- | :------------------------ | :------------------------------------------------------------- |
+| [commit.ql](commit.ql)                       | org, repo, commit!        | Show the details of a commit                                   |
+| [discussion.ql](discussion.ql)               | org, repo, number!        | Show the comments and reactions of a discussion                |
+| [issue.ql](issue.ql)                         | org, repo, number!        | Overview of an Issue                                           |
+| [multi.ql](multi.ql)                         | org, repo, number!        | Get an Issue/Pull Request/Discussion, without knowing the type |
+| [org-repos.ql](org-repos.ql)                 | org, count                | List the first `$count` repos on `$org`                        |
+| [pr.ql](pr.ql)                               | org, repo, number!        | Overview of a Pull Request                                     |
+| [pr-checks.ql](pr-checks.ql)                 | org, repo, number!        | Show the checks run on a PR                                    |
+| [pr-commits.ql](pr-commits.ql)               | org, repo, number!        | Show the commits and merge commit of a Pull Request            |
+| [pr-paged.ql](pr-paged.ql)                   | org, repo, cursor         | Paged list of merged Pull Requests                             |
+| [rate-limit.ql](rate-limit.ql)               |                           | Check how many queries have been used / are left               |
+| [search-discussion.ql](search-discussion.ql) |                           | Search a NeoMutt discussion                                    |
+
+```sh
+gh api graphql -f query="$(cat rate-limit.ql)"
+```
+
+might return:
+
+```json
+{
+  "data": {
+    "rateLimit": {
+      "cost": 1,
+      "limit": 5000,
+      "remaining": 4985,
+      "used": 15,
+      "resetAt": "2023-10-08T00:31:18Z",
+      "nodeCount": 0
+    }
+  }
+}
+```
+
+To specify parameters, use the `-F key=value` option:
+
+```sh
+gh api graphql -F org=neomutt -F repo=neomutt -F number=4037 -f query="$(cat pr-commits.ql)"
+```
+
+To get multiple pages of data, you can use the `endCursor` field and the `after` parameter:
+
+```sh
+# First run (no parameters)
+gh api graphql -f query="$(cat pr-paged.ql)"
+```
+
+Output contains something like:
+
+```
+"pageInfo": {
+  "hasNextPage": true,
+  "endCursor": "Y3Vyc29yOnYyOpHOBjMBXA=="
+}
+```
+
+To get the nex page, run:
+
+```
+gh api graphql -F cursor="Y3Vyc29yOnYyOpHOBjMBXA==" -f query="$(cat pr-paged.ql)"
+```
+
