@@ -97,6 +97,92 @@ To specify parameters, use the `-F key=value` option:
 gh api graphql -F org=neomutt -F repo=neomutt -F number=4037 -f query="$(cat pr-commits.ql)"
 ```
 
+Sample output:
+
+```json
+{
+  "data": {
+    "organization": {
+      "repository": {
+        "pullRequest": {
+          "number": 4037,
+          "title": "Refactor the Message Window Usage",
+          "merged": true,
+          "commits": {
+            "nodes": [
+              {
+                "commit": {
+                  "messageHeadline": "force initial window size",
+                  "oid": "f3c4aa207ae2c5e2a0f344d837121ab96e5525ef"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: indefinite article",
+                  "oid": "e4f3b9380d33e2b27c5542faecf89fc91442ce59"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: add new features",
+                  "oid": "2a9b54b1818ee200fa8cfef00b6abf7a65d14ec3"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgcont: fix redraw",
+                  "oid": "41c015df55fe876e63f44dee172fa575880ef5df"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: yes/no/quad",
+                  "oid": "321d00d081fe4eebccb9902eae2cbb9ce7b3f5c4"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: multi",
+                  "oid": "9463d70411e680551aadea9ffd8f08d9f4d42bbf"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: upgrade mw_change_flag()",
+                  "oid": "cc3f0a91dee1d164c1ee9d7b5c2ee99d4bb0effd"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: <what-key>",
+                  "oid": "8c0c69f8bcd0a95b2748532413540defc8be034b"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "<what-key> 2-line",
+                  "oid": "50e8e9120fa1624bcb0b49550ddf6502ac0b4fd4"
+                }
+              },
+              {
+                "commit": {
+                  "messageHeadline": "msgwin: upgrade bounce message",
+                  "oid": "2fbfca8d0bc302b330d4923d5229227d9afa8cd1"
+                }
+              }
+            ]
+          },
+          "mergeCommit": {
+            "messageHeadline": "merge: refactor the MessageWindow",
+            "oid": "5a855fd927edab3843d745d1cf754116479ab275"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 To get multiple pages of data, you can use the `endCursor` field and the `after` parameter:
 
 ```sh
